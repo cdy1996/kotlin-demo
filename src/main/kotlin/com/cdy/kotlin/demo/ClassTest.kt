@@ -10,7 +10,6 @@ open class ClassTest(var int: Int, b: String) : Parent(b) {
     val age: Int = 0
         get() = field + int
 
-
     override fun onClick() {
     }
 

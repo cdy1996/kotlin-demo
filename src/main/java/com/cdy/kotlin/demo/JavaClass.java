@@ -22,6 +22,24 @@ public class JavaClass {
 
         String content = FilesKt.readText(file, Charset.defaultCharset());
 
+
+        BaseTestKt.onlyIf(true, ()->{
+            System.out.println("@31");
+            return null;
+        });
+        BaseTestKt.onlyIf2(true, (a)->{
+            System.out.println("@31");
+            return null;
+        });
+        BaseTest1 baseTest1 = new BaseTest1() {
+
+        };
+        BaseTestKt.onlyIf(true,(b, a)->{
+            if (b.equals(a)) {
+
+            }
+            return null;
+        },baseTest1);
     }
 
 }

@@ -52,7 +52,8 @@ fun testStream(){
 
     val map = list.map { it - 'a' }
     val find = map
-            .filter { it > 0 }
+            .filter {
+                it > 0 }
             .find { it > 1 }
 
 

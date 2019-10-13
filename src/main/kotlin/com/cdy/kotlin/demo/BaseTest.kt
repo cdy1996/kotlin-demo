@@ -44,6 +44,11 @@ fun main(args: Array<String>) {
         s.toString()
         println("打印日志")
     }
+    onlyIf2(true) {
+        s.toString()
+        println("打印日志")
+    }
+
 
     val function: () -> Unit //函数对象  函数式一等公民
     function = runable::run
@@ -56,11 +61,18 @@ fun main(args: Array<String>) {
     onlyIf(true, f)
 
 
-    val f1 = fun BaseTest1.() {
+    val f1 = fun BaseTest1.(i:Boolean) {
         s.toString()
         println("runnable::run")
     }
     onlyIf(true, f1, s)
+    onlyIf22(true, s){
+        println()
+    }
+    onlyIf2(true, s){ b: BaseTest1, b1: Boolean ->
+        println()
+    }
+
 }
 
 object Utils {
@@ -105,14 +117,30 @@ fun testLambda() {
 
 interface BaseTest1
 
-fun onlyIf(isDebug: Boolean, block: BaseTest1.() -> Unit, base: BaseTest1) {
+fun onlyIf(isDebug: Boolean, block: BaseTest1.(int :Boolean) -> Unit, base: BaseTest1) {
     if (isDebug) {
-        base.block()
+        base.block(isDebug)
+    }
+}
+fun onlyIf22(isDebug: Boolean,b:BaseTest1, block: BaseTest1.() -> Unit) {
+    if (isDebug) {
+        b.block()
+    }
+}
+fun onlyIf2(isDebug: Boolean,b:BaseTest1, block: (bb:BaseTest1,int :Boolean) -> Unit) {
+    if (isDebug) {
+        block(b, isDebug)
+
     }
 }
 
 fun onlyIf(isDebug: Boolean, block: () -> Unit) {
     if (isDebug) {
         block()
+    }
+}
+fun onlyIf2(isDebug: Boolean, block: (int :Boolean) -> Unit) {
+    if (isDebug) {
+        block(isDebug)
     }
 }

@@ -78,10 +78,12 @@ fun domainTest() {
     //let 和run 会返回闭包的结果
     val user = User1("cdy")
     // let有this参数
-    val let = user.let { user -> "let::${user.javaClass}" }
+    val let = user.let { user
+        -> "let::${user.javaClass}" }
     println(let)
     // run 没有this参数, 直接可以调用this
-    val run = user.run { "run::${this.javaClass}" }
+    val run = user.run {
+        "run::${this.javaClass}" }
     println(run)
 
     // also 和apply继续返回user对象
@@ -97,7 +99,9 @@ fun domainTest() {
             ?.also {
                 println("姓名${it.name}") }
             ?: println("姓名为空")
-    user.takeUnless {  it.name.length > 0 }?.also { println("姓名为空") } ?: println("姓名${user.name}")
+    user.takeUnless {
+        it.name.length > 0 }?.also {
+        println("姓名为空") } ?: println("姓名${user.name}")
 
 
     with(user) {
